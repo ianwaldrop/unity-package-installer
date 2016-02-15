@@ -1,0 +1,28 @@
+{
+  "name": "unity-package-installer",
+  "version": "0.1.0",
+  "description": "A utility for installing npm packages into a unity project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianwaldrop/unity-package-installer.git"
+  },
+  "files": [
+    "index.js",
+    "scripts",
+    "tests"
+  ],
+  "author": {
+    "name": "ianwaldrop"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianwaldrop/unity-package-installer/issues"
+  },
+  "homepage": "https://github.com/ianwaldrop/unity-package-installer",
+  "dependencies": {
+    "ncp": "^2.0.0",
+    "mkdirp": "^0.5.1",
+    "find-parent-dir": "^0.3.0"
+  }
+}
