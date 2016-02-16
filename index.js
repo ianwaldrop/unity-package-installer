@@ -4,38 +4,42 @@ var findParent = require('find-parent-dir')
   , ncp = require('ncp')
 ;
 
-exports.install = function (sourceFolder, packageName, callback) {
+const PACKAGES_FOLDER_NAME = 'Packages';
 
-	findParent(__dirname, 'ProjectSettings', function (err, dir) {
-		if (err) {
-			console.error(err);
-			process.exit(1);
-			callback(err);
-		}
+function handleError(err, callback) {
+	if (callback) {
+		callback(err);
+	}
+	else {
+		console.error(err);
+		process.exit(1);
+	}
+}
+
+function getProjectRootFolder(callback) {
+    findParent(__dirname, 'ProjectSettings', function (err, dir) {
+      if (err) handleError (err, callback);
+      if (dir) callback(null, dir);
+  });
+}
+
+exports.install = function (sourceFolder, packageName, callback) {
+	getProjectRootFolder(function (err, dir) {
+		if (err) handleError(err, callback);
 
 		if (dir) {
-			var unityAssetsPath = path.join(dir, 'Assets');
-			var dir = path.join(unityAssetsPath, 'packages', packageName);
+			var destination = path.join(dir, 'Assets', 'Packages', packageName);
 
-			// Create folder if missing
-			mkdirp(dir, function (err) {
-				if (err) {
-					console.error(err);
-					process.exit(1);
-					callback(err);
-			  	}
+			// create folder hierarchy if necessary
+		  mkdirp(destination, function (err) {
+			  if (err) handleError(err, callback);
 
-			  	// Copy files
-				ncp(sourceFolder, dir, function (err) {
-					if (err) {
-						console.error(err);
-						process.exit(1);
-						callback(err);
-					}
-
-					callback(null, dir);
-			  	});
-			});
+				// copy source folder to destination
+			  ncp(sourceFolder, destination, function (err) {
+				  if (err) handleError(err, callback);
+				  if (callback) callback(null, destination);
+			  });
+		  });
 		}
 		else {
 			callback("Failed to install. Reason: No unity project found to install into!")
