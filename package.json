@@ -1,6 +1,6 @@
 {
   "name": "unity-package-installer",
-  "version": "0.1.1",
+  "version": "1.2.0",
   "description": "A utility for installing npm packages into a unity project",
   "keywords": [
     "unity3d",
