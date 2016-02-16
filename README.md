@@ -36,6 +36,8 @@ You may elect to control installing your package via a post install script of yo
 },
 ```
 
+The following example will copy the contents of `sourceFolder` into `Assets/Packages/My Unity Package`.
+
 ```javascript
 const PACKAGE_NAME = 'My Unity Package';
 
@@ -46,19 +48,17 @@ var path = require('path');
 var sourceFolder = path.join(__dirname, '..', 'Files', PACKAGE_NAME, 'Source');
 
 // install the source into unity
-installer.install(sourceFolder, PACKAGE_NAME);
-```
+installer.install(sourceFolder, PACKAGE_NAME, callback);
 
-Given the above, the contents of `sourceFolder` folder will be copied into `Assets/Packages/My Unity Package`.
-
-You can also provide a callback to the installer if you want or need to perform additional actions after your files are copied into your project.
-
-```javascript
+// optional callback
 function callback(err, dir) {
-  // err - an error that occurred while trying to install your package
-  // dir - the directory within your unity project where the files were just copied to
+  // err - an error which occurred while trying to install your package
+  // dir - the directory within the unity project that was source copied to
 }
 ```
+
+
+As demonstrated, you may provide a callback to the installer if you want/need to perform additional actions after your files are copied into your project.
 
 ## Enhancements
 I plan on using this utility with something I'm developing now, and already have a few improvements in mind. If you think of any, please feel free to [create an issue](https://github.com/ianwaldrop/unity-package-installer/issues)!
