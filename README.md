@@ -10,11 +10,31 @@ Add `unity-package-installer` as a dependency to your `package.json` file. Infor
 
 ```json
 "dependencies": {
-	"unity-package-installer": ">=0.1.1"
+	"unity-package-installer": ">=0.2.0"
 },
 ```
 
-To use it, simply tell the installer where the source is and what the folder inside Unity should be called.
+### Automatic installation of packages
+To subscribe to automatic installation of your package into a unity project after `npm install`, add a `unity_package_installer` config.
+```json
+"config": {
+	"unity_package_installer": {
+		"source": "Source",
+		"path": "Test Module"
+	}
+}
+```
+* source: A relative path to the folder to install in your unity project
+* path: The name of the folder in unity to install to. The above example will result in a path of `Assets/Packages/Test Module`.
+
+### Manual installation of packages
+You may elect to control installing your package via a post install script of your own.
+
+```json
+"scripts": {
+  "postinstall": "node scripts/postinstall.js"
+},
+```
 
 ```javascript
 const PACKAGE_NAME = 'My Unity Package';
@@ -39,21 +59,6 @@ function callback(err, dir) {
   // dir - the directory within your unity project where the files were just copied to
 }
 ```
-
-## Auto installation of your package
-If you would like your package to be automatically installed after issuing the `npm install {{package}}` command, be sure to include a postInstall script.
-
-### Tell npm which script to run
-
-Npm will run scripts for you at certain times, like after installing a package. You just have to tell it which script to run.
-
-```json
-"scripts": {
-  "postinstall": "node scripts/postinstall.js"
-},
-```
-
-In this case `postinstall.js` looks exactly like the above example, but you might want to do more with it.
 
 ## Enhancements
 I plan on using this utility with something I'm developing now, and already have a few improvements in mind. If you think of any, please feel free to [create an issue](https://github.com/ianwaldrop/unity-package-installer/issues)!

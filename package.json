@@ -24,6 +24,9 @@
   "bugs": {
     "url": "https://github.com/ianwaldrop/unity-package-installer/issues"
   },
+  "scripts": {
+    "install": "mkdir -p ../.hooks && cp scripts/postinstall.sh ../.hooks/postinstall && chmod +x ../.hooks"
+  },
   "homepage": "https://github.com/ianwaldrop/unity-package-installer",
   "dependencies": {
     "ncp": "^2.0.0",
