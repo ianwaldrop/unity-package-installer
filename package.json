@@ -1,8 +1,11 @@
 {
   "name": "unity-package-installer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A utility for installing npm packages into a unity project",
-  "keywords": ["unity3d", "utility"],
+  "keywords": [
+    "unity3d",
+    "utility"
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
