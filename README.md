@@ -10,7 +10,7 @@ Add `unity-package-installer` as a dependency to your `package.json` file. Infor
 
 ```json
 "dependencies": {
-	"unity-package-installer": ">=0.2.0"
+  "unity-package-installer": ">=0.2.0"
 },
 ```
 
@@ -18,10 +18,10 @@ Add `unity-package-installer` as a dependency to your `package.json` file. Infor
 To subscribe to automatic installation of your package into a unity project after `npm install`, add a `unity_package_installer` config.
 ```json
 "config": {
-	"unity_package_installer": {
-		"source": "Source",
-		"path": "Test Module"
-	}
+  "unity_package_installer": {
+    "source": "Source",
+    "path": "Test Module"
+  }
 }
 ```
 * source: A relative path to the folder to install in your unity project
