@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ianwaldrop/unity-package-installer.png?label=ready&title=Ready)](https://waffle.io/ianwaldrop/unity-package-installer)
 # unity-package-installer
 A lightweight utility for installing npm packages into a unity project.
 
