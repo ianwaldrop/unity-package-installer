@@ -14,8 +14,9 @@
     "tests"
   ],
   "author": {
-    "name": "ianwaldrop"
+    "name": "ianwaldrop <waldropij@gmail.com>"
   },
+  "contributors": [],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ianwaldrop/unity-package-installer/issues"
