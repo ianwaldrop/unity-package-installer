@@ -1,1 +1,1 @@
-node ../unity-package-installer/index.js
+node ../unity-package-installer/autoinstall.js
