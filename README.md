@@ -5,12 +5,11 @@ A lightweight utility for installing npm packages into a unity project.
 This utility was inspired and informed by the work done by [shadowmint](https://github.com/shadowmint); many thanks to him for blazing the trail. This utility encapsulates the boilerplate of installing packages into a Unity3D project.
 
 ## Usage
-
 Add `unity-package-installer` as a dependency to your `package.json` file. Information on the latest version can be found [here](https://www.npmjs.com/package/unity-package-installer).
 
 ```json
 "dependencies": {
-  "unity-package-installer": ">=0.2.0"
+  "unity-package-installer": ">=0.3.0"
 },
 ```
 
@@ -25,7 +24,7 @@ To subscribe to automatic installation of your package into a unity project afte
 }
 ```
 * source: A relative path to the folder to install in your unity project
-* path: The name of the folder in unity to install to. The above example will result in a path of `Assets/Packages/Test Module`.
+* path: The name of the folder in unity to install to; if not provided then your package name will be used instead.
 
 ### Manual installation of packages
 You may elect to control installing your package via a post install script of your own.
