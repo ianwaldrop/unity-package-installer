@@ -9,5 +9,5 @@ installer.install(__dirname, PACKAGE_NAME, function(err, dir) {
 		process.exit(1);
 	}
 
-	console.log("Test success! Installed " + PACKAGE_NAME + " to: " + dir);
+	console.log(`Test success! Installed ${PACKAGE_NAME} to: ${dir}`);
 });
