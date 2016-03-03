@@ -51,17 +51,20 @@ function getProjectRootFolder(callback) {
   });
 }
 
-autoinstall = function() {
-  var env = process.env;
-  var sourceFolder = env.npm_package_config_unity_package_installer_source;
-  if (sourceFolder) {
-    var packageName = env.npm_package_name;
-    var destination = env.npm_package_config_unity_package_installer_path || packageName;
-    install(sourceFolder, destination);
+function hasSource(sourceFolder) {
+  try {
+    var fs = require('fs');
+    var stats = fs.statSync(path.join(process.env.PWD, sourceFolder));
+    return stats && stats.isDirectory();
+  } catch (e) {
+    return false;
   }
 }
 
 install = function (sourceFolder, packageName, callback) {
+  if (!hasSource(sourceFolder))
+    return;
+
 	getProjectRootFolder(function (err, dir) {
 		if (err) handleError(err, callback);
 		if (dir) {
@@ -89,12 +92,13 @@ install = function (sourceFolder, packageName, callback) {
         if (err) handleError(err, callback);
         var folderName = getFolderName(folder);
         var target = getTarget(folderName);
-        copy(folder, target, callback);
+        copy(folder, target, ()=>
+        {
+          var message = 'Installed ' + packageName;
+          console.log('> ' + message.cyan);
+          if (callback) callback(null, PACKAGE_FOLDER_INSTALL_PATH);
+        });
       });
-
-      var message = 'Installed ' + packageName;
-      console.log('> ' + message.cyan);
-      if (callback) callback(null, PACKAGE_FOLDER_INSTALL_PATH);
 		}
 		else {
       handleError("Failed to install. Reason: No unity project found to install into!", callback);
@@ -103,15 +107,14 @@ install = function (sourceFolder, packageName, callback) {
 }
 
 function copy(source, target, callback) {
-  mkdirp(target, function (err) {
+  mkdirp(target, err => {
     if (err) handleError(err, callback);
-    ncp(source, target, function (err) {
+    ncp(source, target, err => {
       if (err) handleError(err, callback);
+      callback();
       // console.log('copying from [' + source + ']\n          to [' + target + ']');
     });
   });
 }
 
 exports.install = install;
-
-autoinstall();
