@@ -12,6 +12,7 @@
     "url": "git+https://github.com/ianwaldrop/unity-package-installer.git"
   },
   "files": [
+    "autoinstall.js",
     "index.js",
     "scripts",
     "tests"
